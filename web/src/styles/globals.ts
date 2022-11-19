@@ -3,21 +3,20 @@ import { createGlobalStyle } from "styled-components";
 export const Globals = createGlobalStyle`
 
 :root {
-    --cor-fundo-container: #f8f8f8;
-    --cor-fundo-imagem: #f9f9f9;
-    --cor-borda: #f4f4f4;
-    --cor-container: #ffffff;
-    --cor-texto-claro: #ffffff;
-    --cor-texto-escuro: #6e6e6e;
-    --cor-primaria: #2189ff;
-    --cor-erro: #ff2121;
-    --cor-secundaria: #ff7321;
-    --cor-verde: #008761;
-    --cor-amarela: #ffe421;
-    --cor-roxa: #5821ff;
-    --cor-preta: #000000;
-    --transparencia-modal: #00000060;
-    --transparente: #00000000;
+    --color-background-container: #f8f8f8;
+    --color-background-image: #f9f9f9;
+    --color-border: #f4f4f4;
+    --color-container: #ffffff;
+    --color-text-clear: #ffffff;
+    --color-text-black: #6e6e6e;
+    --color-primary: #2189ff;
+    --color-error: #ff2121;
+    --color-secondary: #ff7321;
+    --color-green: #008761;
+    --color-yellow: #ffe421;
+    --color-purple: #5821ff;
+    --color-black: #000000;
+    --transparency-modal: #00000060;
 }
 
 * {
@@ -25,7 +24,7 @@ export const Globals = createGlobalStyle`
 }
 
 body {
-    background-color: var(--cor-fundo-container);
+    background-color: var(--color-background-container);
     -webkit-font-smoothing: antialiased;
 }
 
