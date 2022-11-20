@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const Globals = createGlobalStyle`
 
 :root {
-    --color-background-container: #f8f8f8;
+    --color-background: #ffffff;
     --color-background-image: #f9f9f9;
     --color-border: #f4f4f4;
     --color-container: #ffffff;
@@ -24,7 +24,7 @@ export const Globals = createGlobalStyle`
 }
 
 body {
-    background-color: var(--color-background-container);
+    background-color: var(--color-container);
     -webkit-font-smoothing: antialiased;
 }
 
@@ -177,4 +177,11 @@ table {
     border-spacing: 0;
 }
 
+.body_container {
+    max-width: 82.5rem;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: var(--color-background);
+    min-height: 100vh;
+}
 `;

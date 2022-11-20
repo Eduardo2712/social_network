@@ -1,8 +1,24 @@
-generator client {
-    provider = "prisma-client-js"
+datasource db {
+    provider             = "mysql"
+    url                  = env("DATABASE_URL")
+    referentialIntegrity = "prisma"
 }
 
-datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["referentialIntegrity"]
+}
+
+model users {
+    id               Int      @id @default(autoincrement())
+    use_id_type_user Int
+    use_name         String   @db.VarChar(255)
+    use_email        String   @db.VarChar(255)
+    use_phone        String   @db.VarChar(255)
+    use_password     String   @db.VarChar(255)
+    use_birth_data   DateTime
+    created_at       DateTime @default(now())
+    updated_at       DateTime @default(now())
+
+    @@unique([use_email])
 }

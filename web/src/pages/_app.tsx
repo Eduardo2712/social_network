@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { Globals } from "../styles/globals";
 import Head from "next/head";
 
 config.autoAddCss = false;
@@ -21,7 +22,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 <title>Social Network</title>
             </Head>
             <ThemeProvider theme={{}}>
-                <Component {...pageProps} />
+                <Globals />
+                <div className="body_container">
+                    <Component {...pageProps} />
+                </div>
             </ThemeProvider>
         </>
     );

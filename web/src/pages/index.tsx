@@ -1,14 +1,15 @@
 import type { NextPage } from "next";
-import Container from "./estilo";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Index: NextPage = () => {
-    return (
-        <>
-            <Container>
-                <div></div>
-            </Container>
-        </>
-    );
+    const router = useRouter();
+
+    useEffect(() => {
+        router.push("/login");
+    }, [router]);
+
+    return <></>;
 };
 
 export default Index;
