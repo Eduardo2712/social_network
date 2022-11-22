@@ -4,7 +4,6 @@ import "dotenv/config";
 import routes from "./routes";
 
 const app = express();
-const porta = process.env.PORTA;
 
 app.use(cors());
 app.use(express.json());

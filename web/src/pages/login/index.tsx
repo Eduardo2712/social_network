@@ -4,17 +4,23 @@ import { NextPage } from "next";
 import Container from "./style";
 import * as Yup from "yup";
 import Link from "next/link";
+import { auth } from "../../requests/userRequest";
+import { User } from "../../types";
 
 const Login: NextPage = () => {
     const schema = Yup.object().shape({
-        email: Yup.string()
+        use_email: Yup.string()
             .email("Fill in a valid e-mail!")
             .required("Fill in this field!"),
-        password: Yup.string().required("Fill in this field!")
+        use_password: Yup.string()
+            .min(6, "Password must be at least 6 characters long!")
+            .required("Fill in this field!")
     });
 
-    const onSubmit = async () => {
-        return null;
+    const onSubmit = async (
+        values: Pick<User, "use_email" | "use_password">
+    ) => {
+        auth(values);
     };
 
     return (
@@ -27,8 +33,8 @@ const Login: NextPage = () => {
                     validateOnMount
                     validationSchema={schema}
                     initialValues={{
-                        email: "",
-                        password: ""
+                        use_email: "",
+                        use_password: ""
                     }}
                 >
                     {({ handleChange }) => (
@@ -39,13 +45,13 @@ const Login: NextPage = () => {
 
                                     <Field
                                         className="input_form"
-                                        id="email"
-                                        name="email"
+                                        id="use_email"
+                                        name="use_email"
                                         onChange={handleChange}
                                     ></Field>
 
                                     <p className="text_error">
-                                        <ErrorMessage name="email" />
+                                        <ErrorMessage name="use_email" />
                                     </p>
                                 </div>
 
@@ -54,14 +60,14 @@ const Login: NextPage = () => {
 
                                     <Field
                                         className="input_form"
-                                        id="password"
-                                        name="password"
+                                        id="use_password"
+                                        name="use_password"
                                         type="password"
                                         onChange={handleChange}
                                     ></Field>
 
                                     <p className="text_error">
-                                        <ErrorMessage name="password" />
+                                        <ErrorMessage name="use_password" />
                                     </p>
                                 </div>
 
