@@ -20,7 +20,25 @@ const Login: NextPage = () => {
     const onSubmit = async (
         values: Pick<User, "use_email" | "use_password">
     ) => {
-        auth(values);
+        try {
+            const response = await auth(values);
+
+            if (response.data.user && response.data.token) {
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify({
+                        ...response.data.user,
+                        token: response.data.token
+                    })
+                );
+            }
+        } catch (error) {
+            if (typeof error === "string") {
+                console.error(error);
+            } else if (error instanceof Error) {
+                console.error(error.message);
+            }
+        }
     };
 
     return (
@@ -37,7 +55,7 @@ const Login: NextPage = () => {
                         use_password: ""
                     }}
                 >
-                    {({ handleChange }) => (
+                    {({ handleChange, handleSubmit }) => (
                         <Form method="post">
                             <div className="block_form">
                                 <div className="block_input_form">
@@ -48,6 +66,9 @@ const Login: NextPage = () => {
                                         id="use_email"
                                         name="use_email"
                                         onChange={handleChange}
+                                        onKeyUp={(e: any) =>
+                                            e.key === "Enter" && handleSubmit
+                                        }
                                     ></Field>
 
                                     <p className="text_error">
@@ -64,6 +85,9 @@ const Login: NextPage = () => {
                                         name="use_password"
                                         type="password"
                                         onChange={handleChange}
+                                        onKeyUp={(e: any) =>
+                                            e.key === "Enter" && handleSubmit
+                                        }
                                     ></Field>
 
                                     <p className="text_error">

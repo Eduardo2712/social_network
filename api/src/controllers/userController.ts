@@ -1,14 +1,16 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
+import { User } from "../types/index";
 import * as Yup from "yup";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
 class UserController {
     static auth = async (req: Request, res: Response) => {
         const { use_password, use_email } = req.body;
-        const key_token = process.env.KEY_TOKEN;
+        const key_token: string = String(process.env.KEY_TOKEN);
 
         const schema = Yup.object().shape({
             use_email: Yup.string()
@@ -23,26 +25,54 @@ class UserController {
             await schema.validate(req.body);
         } catch (error) {
             if (typeof error === "string") {
-                return res.status(400).json({ erro: error });
+                return res.status(400).json({ error: error });
             } else if (error instanceof Error) {
                 return res.status(400).json({
-                    erro: error.message
+                    error: error.message
                 });
             }
         }
 
         try {
-            const user = await prisma.users.findFirst({
+            const user: User | null = await prisma.users.findFirst({
                 where: {
                     use_email
                 }
             });
+
+            if (!user) {
+                return res.status(400).json({ error: "User not found!" });
+            }
+
+            bcrypt.compare(
+                use_password,
+                user.use_password ?? "",
+                (err, result) => {
+                    if (!result) {
+                        return res
+                            .status(400)
+                            .json({ error: "User not found!" });
+                    } else {
+                        const token = jwt.sign(
+                            { id: user.id, email: user.use_email },
+                            key_token,
+                            {
+                                expiresIn: 604800
+                            }
+                        );
+
+                        delete user.use_password;
+
+                        return res.status(200).json({ user, token });
+                    }
+                }
+            );
         } catch (error) {
             if (typeof error === "string") {
-                return res.status(500).json({ erro: error });
+                return res.status(500).json({ error: error });
             } else if (error instanceof Error) {
                 return res.status(500).json({
-                    erro: error.message
+                    error: error.message
                 });
             }
         }
