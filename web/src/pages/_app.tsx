@@ -5,10 +5,14 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Globals } from "../styles/globals";
 import Head from "next/head";
+import Header from "../components/header";
+import { useRouter } from "next/router";
 
 config.autoAddCss = false;
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+    const router = useRouter();
+
     return (
         <>
             <Head>
@@ -22,6 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 <title>Social Network</title>
             </Head>
             <ThemeProvider theme={{}}>
+                {router.asPath !== "/login" && <Header />}
                 <Globals />
                 <div className="body_container">
                     <Component {...pageProps} />

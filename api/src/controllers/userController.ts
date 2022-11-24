@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 class UserController {
     static auth = async (req: Request, res: Response) => {
         const { use_password, use_email } = req.body;
-        const key_token: string = String(process.env.KEY_TOKEN);
+        const key_token = String(process.env.KEY_TOKEN);
 
         const schema = Yup.object().shape({
             use_email: Yup.string()

@@ -6,8 +6,11 @@ import * as Yup from "yup";
 import Link from "next/link";
 import { auth } from "../../requests/userRequest";
 import { User } from "../../types";
+import { useRouter } from "next/router";
 
 const Login: NextPage = () => {
+    const router = useRouter();
+
     const schema = Yup.object().shape({
         use_email: Yup.string()
             .email("Fill in a valid e-mail!")
@@ -31,6 +34,8 @@ const Login: NextPage = () => {
                         token: response.data.token
                     })
                 );
+
+                router.push("/feed");
             }
         } catch (error) {
             if (typeof error === "string") {
