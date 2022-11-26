@@ -1,3 +1,11 @@
+export type ContextLogin = {
+    auth: boolean;
+    user: User | undefined;
+    loading: boolean;
+    logout: () => void;
+    login: (email: string, password: string) => Promise<unknown>;
+};
+
 export type User = {
     id: number;
     use_id_type_user: number;

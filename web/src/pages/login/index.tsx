@@ -7,8 +7,11 @@ import Link from "next/link";
 import { auth } from "../../requests/userRequest";
 import { User } from "../../types";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Login: NextPage = () => {
+    const [loading, setLoading] = useState<boolean>(false);
+
     const router = useRouter();
 
     const schema = Yup.object().shape({
@@ -24,6 +27,7 @@ const Login: NextPage = () => {
         values: Pick<User, "use_email" | "use_password">
     ) => {
         try {
+            setLoading(true);
             const response = await auth(values);
 
             if (response.data.user && response.data.token) {
@@ -43,6 +47,8 @@ const Login: NextPage = () => {
             } else if (error instanceof Error) {
                 console.error(error.message);
             }
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -110,7 +116,11 @@ const Login: NextPage = () => {
                             </div>
 
                             <div className="block_buttons">
-                                <button className="button_enter" type="submit">
+                                <button
+                                    className="button_enter"
+                                    type="submit"
+                                    disabled={loading}
+                                >
                                     Enter
                                 </button>
                             </div>

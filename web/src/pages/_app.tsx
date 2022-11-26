@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -7,11 +7,19 @@ import { Globals } from "../styles/globals";
 import Head from "next/head";
 import Header from "../components/header";
 import { useRouter } from "next/router";
+import { AuthProvider } from "../context/auth";
+import Loading from "../components/loading";
 
 config.autoAddCss = false;
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+    const [loading, setLoading] = useState<boolean>(true);
+
     const router = useRouter();
+
+    useEffect(() => {
+        setLoading(false);
+    }, []);
 
     return (
         <>
@@ -25,13 +33,19 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 />
                 <title>Social Network</title>
             </Head>
-            <ThemeProvider theme={{}}>
-                {router.asPath !== "/login" && <Header />}
-                <Globals />
-                <div className="body_container">
-                    <Component {...pageProps} />
-                </div>
-            </ThemeProvider>
+            <Globals />
+            {!loading ? (
+                <ThemeProvider theme={{}}>
+                    <AuthProvider>
+                        <div className="body_container">
+                            {router.asPath !== "/login" && <Header />}
+                            <Component {...pageProps} />
+                        </div>
+                    </AuthProvider>
+                </ThemeProvider>
+            ) : (
+                <Loading />
+            )}
         </>
     );
 };
