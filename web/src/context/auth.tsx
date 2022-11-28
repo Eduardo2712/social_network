@@ -1,23 +1,19 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ContextLogin, User } from "../types";
 import { RoutesProps } from "react-router";
-import { useRouter } from "next/router";
 import { auth } from "../requests/userRequest";
 
-export const AuthContext = createContext<ContextLogin | null>(null);
+const AuthContext = createContext<ContextLogin>({} as ContextLogin);
 
 export const AuthProvider = ({ children }: RoutesProps) => {
-    const [user, setUser] = useState<User>();
+    const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const router = useRouter();
-
     useEffect(() => {
-        const userRecovery = localStorage.getItem("user") || null;
+        const userRecovery = localStorage.getItem("user");
 
         if (userRecovery) {
             setUser(JSON.parse(userRecovery));
-            router.push("/feed");
         }
 
         setLoading(false);
@@ -50,9 +46,7 @@ export const AuthProvider = ({ children }: RoutesProps) => {
     const logout = () => {
         localStorage.removeItem("user");
 
-        setUser(undefined);
-
-        router.push("/");
+        setUser(null);
     };
 
     return (
@@ -68,4 +62,8 @@ export const AuthProvider = ({ children }: RoutesProps) => {
             {children}
         </AuthContext.Provider>
     );
+};
+
+export const useAuth = () => {
+    return useContext(AuthContext);
 };

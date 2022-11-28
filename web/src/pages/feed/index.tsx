@@ -3,7 +3,7 @@ import Container from "./style";
 const Feed = () => {
     return (
         <Container>
-            <div></div>
+            <div>FEED</div>
         </Container>
     );
 };

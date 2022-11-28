@@ -6,16 +6,14 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Globals } from "../styles/globals";
 import Head from "next/head";
 import Header from "../components/header";
-import { useRouter } from "next/router";
 import { AuthProvider } from "../context/auth";
 import Loading from "../components/loading";
+import ProtectedRoute from "../router";
 
 config.autoAddCss = false;
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps, router }: AppProps) => {
     const [loading, setLoading] = useState<boolean>(true);
-
-    const router = useRouter();
 
     useEffect(() => {
         setLoading(false);
@@ -37,10 +35,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             {!loading ? (
                 <ThemeProvider theme={{}}>
                     <AuthProvider>
-                        <div className="body_container">
-                            {router.asPath !== "/login" && <Header />}
-                            <Component {...pageProps} />
-                        </div>
+                        <ProtectedRoute router={router}>
+                            <div className="body_container">
+                                {router.asPath !== "/login" && <Header />}
+                                <Component {...pageProps} />
+                            </div>
+                        </ProtectedRoute>
                     </AuthProvider>
                 </ThemeProvider>
             ) : (

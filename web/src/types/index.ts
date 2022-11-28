@@ -1,6 +1,6 @@
 export type ContextLogin = {
     auth: boolean;
-    user: User | undefined;
+    user: User | null;
     loading: boolean;
     logout: () => void;
     login: (email: string, password: string) => Promise<unknown>;

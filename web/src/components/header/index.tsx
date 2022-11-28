@@ -4,13 +4,12 @@ import {
     faRightFromBracket
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
-import { AuthContext } from "../../context/auth";
-import { ContextLogin } from "../../types";
+import { useAuth } from "../../context/auth";
 import Container from "./style";
 
 const Header = () => {
-    const { logout, user } = useContext(AuthContext) as ContextLogin;
+    const { logout, user } = useAuth();
+    console.log(user);
 
     return (
         <Container>
