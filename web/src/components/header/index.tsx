@@ -9,7 +9,6 @@ import Container from "./style";
 
 const Header = () => {
     const { logout, user } = useAuth();
-    console.log(user);
 
     return (
         <Container>

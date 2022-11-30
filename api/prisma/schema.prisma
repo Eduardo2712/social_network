@@ -1,0 +1,53 @@
+datasource db {
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+generator client {
+    provider = "prisma-client-js"
+    // previewFeatures = ["referentialIntegrity"]
+}
+
+model users {
+    id               Int       @id @default(autoincrement())
+    use_id_type_user Int
+    use_name         String    @db.VarChar(255)
+    use_email        String    @db.VarChar(255)
+    use_phone        String    @db.VarChar(255)
+    use_password     String    @db.VarChar(255)
+    use_text_status  String?   @db.VarChar(255)
+    use_date_status  DateTime?
+    use_delete       Boolean   @default(false)
+    use_birth_data   DateTime
+    created_at       DateTime  @default(now())
+    updated_at       DateTime  @default(now())
+    post             posts[]
+}
+
+model posts {
+    id          Int      @id @default(autoincrement())
+    pos_id_user Int
+    pos_text    String   @db.VarChar(255)
+    pos_delete  Boolean  @default(false)
+    created_at  DateTime @default(now())
+    updated_at  DateTime @default(now())
+    users       users    @relation(fields: [pos_id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "post_ibfk_1")
+    files       files[]
+
+    @@index([pos_id_user])
+}
+
+model files {
+    id          Int      @id @default(autoincrement())
+    fil_id_post Int
+    fil_size    Int
+    fil_name    String   @db.VarChar(255)
+    fil_path    String   @db.VarChar(255)
+    fil_delete  Boolean  @default(false)
+    created_at  DateTime @default(now())
+    updated_at  DateTime @default(now())
+    posts       posts    @relation(fields: [fil_id_post], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "files_ibfk_1")
+
+    @@index([fil_id_post])
+}

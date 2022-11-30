@@ -28,6 +28,7 @@ const Login: NextPage = () => {
     ) => {
         try {
             setLoading(true);
+
             const response = await auth(values);
 
             if (response.data.user && response.data.token) {

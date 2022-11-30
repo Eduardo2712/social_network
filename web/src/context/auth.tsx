@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }: RoutesProps) => {
         }
 
         setLoading(false);
-    }, []);
+    }, [children]);
 
     const login = async (email: string, password: string) => {
         try {

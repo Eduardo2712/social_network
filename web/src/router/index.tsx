@@ -7,8 +7,8 @@ export type Props = {
 };
 
 const ProtectedRoute = (props: Props) => {
-    const PUBLIC_ROUTES = ["/login"];
     const { auth } = useAuth();
+    const PUBLIC_ROUTES = ["/login"];
 
     if (
         !auth &&
@@ -16,19 +16,15 @@ const ProtectedRoute = (props: Props) => {
         !localStorage.getItem("user")
     ) {
         props.router.push("/login");
-        return null;
-    }
-
-    if (
+    } else if (
         auth &&
         props.router.pathname === "/login" &&
         localStorage.getItem("user")
     ) {
         props.router.push("/feed");
-        return null;
+    } else {
+        return props.children;
     }
-
-    return props.children;
 };
 
 export default ProtectedRoute;

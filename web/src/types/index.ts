@@ -14,6 +14,8 @@ export type User = {
     use_phone: string;
     use_password: string;
     use_birth_data: Date;
+    use_date_status: Date;
+    use_text_status: string;
     created_at: Date;
     updated_at: Date;
 };
