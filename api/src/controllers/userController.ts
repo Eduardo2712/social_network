@@ -37,6 +37,9 @@ class UserController {
             const user: User | null = await prisma.users.findFirst({
                 where: {
                     use_email
+                },
+                include: {
+                    files: true
                 }
             });
 

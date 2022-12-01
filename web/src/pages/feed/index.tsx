@@ -15,12 +15,10 @@ const Feed = () => {
 
     return (
         <Container>
-            <div className="block_status">
-                <textarea
-                    className="text_area_status"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                ></textarea>
+            <div className="block_feed">
+                <div className="block_user">
+                    <div className="block_color_user"></div>
+                </div>
             </div>
         </Container>
     );
