@@ -3,12 +3,12 @@ import { createGlobalStyle } from "styled-components";
 export const Globals = createGlobalStyle`
 
 :root {
-    --color-background: #ffffff;
+    --color-background: #f4f4f4;
     --color-background-image: #f9f9f9;
     --color-border: #f4f4f4;
     --color-container: #ffffff;
     --color-text-clear: #ffffff;
-    --color-text-black: #6e6e6e;
+    --color-text-black: #2a2a2a;
     --color-primary: #2189ff;
     --color-error: #ff2121;
     --color-secondary: #ff7321;
@@ -24,7 +24,7 @@ export const Globals = createGlobalStyle`
 }
 
 body {
-    background-color: var(--color-container);
+    background-color: var(--color-background);
     -webkit-font-smoothing: antialiased;
 }
 

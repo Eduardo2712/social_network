@@ -23,15 +23,32 @@ const Container = styled.div`
         align-items: center;
     }
 
-    .bloco_user {
-        width: 17rem;
-        padding: 2rem;
+    .block_image_user {
+        height: 27rem;
+        width: 16rem;
+        background-image: linear-gradient(
+            to top,
+            var(--color-container) 0,
+            var(--color-container) 80%,
+            var(--color-primary) 20%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 1rem;
+        gap: 1rem;
     }
 
-    .block_color_user {
-        height: 4rem;
-        width: 17rem;
-        background-color: var(--color-primary);
+    .user_image {
+        border-radius: 50%;
+        border: 0.3rem solid var(--color-container) !important;
+    }
+
+    .text_name {
+        color: var(--color-text-black);
+        font-size: 1.2rem;
+        font-weight: 800;
     }
 `;
 
