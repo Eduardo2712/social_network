@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id               Int       @id @default(autoincrement())
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @default(now())
+  use_id_type_user Int
+  use_name         String    @db.VarChar(255)
+  use_email        String    @db.VarChar(255)
+  use_phone        String    @db.VarChar(255)
+  use_birth_data   DateTime
+  use_password     String    @db.VarChar(255)
+  use_date_status  DateTime?
+  use_delete       Boolean   @default(false)
+  use_text_status  String?   @db.VarChar(500)
+  use_id_photo     Int?
+  files            File?     @relation(fields: [use_id_photo], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  post             Post[]
+
+  @@index([use_id_photo])
+}
+
+model Post {
+  id          Int      @id @default(autoincrement())
+  pos_id_user Int
+  pos_text    String   @db.VarChar(500)
+  pos_delete  Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now())
+  users       User     @relation(fields: [pos_id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  files       File[]
+
+  @@index([pos_id_user])
+}
+
+model File {
+  id          Int      @id @default(autoincrement())
+  fil_id_post Int?
+  fil_size    Int
+  fil_name    String   @db.VarChar(255)
+  fil_delete  Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now())
+  fil_path    String   @db.VarChar(255)
+  posts       Post?    @relation(fields: [fil_id_post], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       User[]
+
+  @@index([fil_id_post])
+}
