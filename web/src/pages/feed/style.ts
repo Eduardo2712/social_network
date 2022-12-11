@@ -1,43 +1,42 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-    .block_status {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 0.5rem;
-    }
-
-    .text_area_status {
-        min-width: 10rem;
-        max-width: 30rem;
-        min-height: 6rem;
-        max-height: 6rem;
-        margin: 0.5rem;
-    }
-
     .block_feed {
         margin-top: 2rem;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1rem;
     }
 
-    .block_image_user {
-        height: 27rem;
-        width: 16rem;
-        background-image: linear-gradient(
-            to top,
-            var(--color-container) 0,
-            var(--color-container) 80%,
-            var(--color-primary) 20%
-        );
+    .block_status {
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
+        background-color: var(--color-container);
+        padding: 1rem;
+    }
+
+    .text_area_status,
+    .text_area_status:focus {
+        width: 30rem;
+        height: 5rem;
+        margin: 0.5rem;
+        border: 0.1rem solid var(--color-border);
+        border-radius: 0.5rem;
+        resize: none;
+        color: var(--color-text-black);
+        font-size: 0.95rem;
+        padding: 0.5rem;
+        outline: none;
+    }
+
+    .block {
+        display: flex;
+        justify-content: center;
         align-items: center;
-        padding-top: 1rem;
-        gap: 1rem;
+        flex-direction: column;
     }
 
     .user_image {
@@ -45,10 +44,26 @@ const Container = styled.div`
         border: 0.3rem solid var(--color-container) !important;
     }
 
-    .text_name {
+    .text_status {
         color: var(--color-text-black);
-        font-size: 1.2rem;
-        font-weight: 800;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .button_status {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-text-clear);
+        border: 0;
+        padding: 0.4rem;
+        width: 7rem;
+        border-radius: 0.3rem;
+        background-color: var(--color-secondary);
+    }
+
+    .block_button {
+        display: flex;
+        justify-content: flex-end;
     }
 `;
 

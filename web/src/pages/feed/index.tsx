@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/auth";
 import Container from "./style";
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import ProfileFollow from "../../components/profile-follow";
 
 const Feed = () => {
     const { user } = useAuth();
@@ -9,24 +9,32 @@ const Feed = () => {
     const [status, setStatus] = useState<string>("");
 
     useEffect(() => {
-        if (user) {
-            setStatus(user.use_text_status ?? "");
-        }
-    }, [user]);
+        setStatus(user?.use_text_status ?? "");
+    }, [user?.use_text_status]);
 
     return (
         <Container>
             <div className="block_feed">
-                <div className="block_image_user">
-                    <Image
-                        src={user?.files.fil_path || ""}
-                        className="user_image"
-                        width={120}
-                        height={120}
-                        alt="User photo"
-                    />
+                <div className="block">
+                    <ProfileFollow />
+                </div>
 
-                    <p className="text_name">{user?.use_name}</p>
+                <div className="block">
+                    <div className="block_status">
+                        <p className="text_status">My status now...</p>
+
+                        <textarea
+                            className="text_area_status"
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                        ></textarea>
+
+                        <div className="block_button">
+                            <button type="button" className="button_status">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Container>
