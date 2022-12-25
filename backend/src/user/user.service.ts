@@ -12,18 +12,19 @@ export class UserService {
     async create(createUserDto: CreateUserDto): Promise<User> {
         const data: Prisma.UserCreateInput = {
             ...createUserDto,
-            use_password: bcrypt.hashSync(createUserDto.use_password, 10)
+            use_id_type_user: 1,
+            password: bcrypt.hashSync(createUserDto.password, 10)
         };
 
         const createdUser = await this.prisma.user.create({ data });
 
         return {
             ...createdUser,
-            use_password: undefined
+            password: undefined
         };
     }
 
-    findByEmail(use_email: string) {
-        return this.prisma.user.findFirst({ where: { use_email } });
+    findByEmail(email: string) {
+        return this.prisma.user.findFirst({ where: { email } });
     }
 }

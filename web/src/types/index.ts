@@ -10,10 +10,10 @@ export type User = {
     id: number;
     use_id_type_user: number;
     use_name: string;
-    use_email: string;
+    email: string;
     use_phone: string;
     use_birth_data: Date;
-    use_password: string;
+    password: string;
     use_date_status: Date | null;
     use_delete: boolean;
     use_text_status: string | null;

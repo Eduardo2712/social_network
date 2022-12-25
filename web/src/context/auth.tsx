@@ -21,9 +21,9 @@ export const AuthProvider = ({ children }: RoutesProps) => {
 
     const login = async (email: string, password: string) => {
         try {
-            const data: Pick<User, "use_email" | "use_password"> = {
-                use_email: email,
-                use_password: password
+            const data: Pick<User, "email" | "password"> = {
+                email,
+                password
             };
 
             const response = await auth(data);

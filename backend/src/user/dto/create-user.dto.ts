@@ -10,7 +10,7 @@ import { User } from "../entities/user.entity";
 export class CreateUserDto extends User {
     @IsEmail()
     @IsString()
-    use_email: string;
+    email: string;
 
     @IsString()
     @MinLength(4)
@@ -19,5 +19,5 @@ export class CreateUserDto extends User {
         message: "password too weak"
     })
     @IsString()
-    use_password: string;
+    password: string;
 }

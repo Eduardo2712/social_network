@@ -1,8 +1,8 @@
 import axios from "axios";
 import { User } from "../types";
 
-export const auth = (props: Pick<User, "use_email" | "use_password">) => {
-    return axios.post(`${process.env.NEXT_PUBLIC_URL_API}/auth`, props, {
+export const auth = (props: Pick<User, "email" | "password">) => {
+    return axios.post(`${process.env.NEXT_PUBLIC_URL_API}/login`, props, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }

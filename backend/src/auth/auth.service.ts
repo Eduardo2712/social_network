@@ -14,10 +14,12 @@ export class AuthService {
         private readonly userService: UserService
     ) {}
 
-    async login(user: User): Promise<UserToken> {
+    async login(
+        user: Pick<User, "id" | "email" | "use_name">
+    ): Promise<UserToken> {
         const payload: UserPayload = {
             sub: user.id,
-            use_email: user.use_email,
+            email: user.email,
             use_name: user.use_name
         };
 
@@ -26,19 +28,19 @@ export class AuthService {
         };
     }
 
-    async validateUser(use_email: string, use_password: string): Promise<User> {
-        const user = await this.userService.findByEmail(use_email);
+    async validateUser(email: string, password: string): Promise<User> {
+        const user = await this.userService.findByEmail(email);
 
         if (user) {
             const isPasswordValid = await bcrypt.compare(
-                use_password,
-                user.use_password
+                password,
+                user.password
             );
 
             if (isPasswordValid) {
                 return {
                     ...user,
-                    use_password: undefined
+                    password: undefined
                 };
             }
         }
