@@ -3,9 +3,10 @@ import {
     IsString,
     Matches,
     MaxLength,
-    MinLength
+    MinLength,
+    IsDate
 } from "class-validator";
-import { User } from "../entities/user.entity";
+import { User } from "src/types/user.type";
 
 export class CreateUserDto extends User {
     @IsEmail()
@@ -20,4 +21,13 @@ export class CreateUserDto extends User {
     })
     @IsString()
     password: string;
+
+    @IsString()
+    @MaxLength(255)
+    use_name: string;
+
+    use_phone: string;
+
+    @IsDate()
+    use_birth_data: Date;
 }

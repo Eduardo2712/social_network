@@ -18,14 +18,23 @@ export type User = {
     use_delete: boolean;
     use_text_status: string | null;
     use_id_photo: number | null;
-    files: File;
+    photo: File;
+    posts: Post[];
+    created_at: Date;
+    updated_at: Date;
+};
+
+export type Post = {
+    id: number;
+    pos_id_user: number;
+    pos_text: string;
+    pos_delete: boolean;
     created_at: Date;
     updated_at: Date;
 };
 
 export type File = {
     id: number;
-    fil_id_post: number | null;
     fil_size: number;
     fil_name: string;
     fil_delete: boolean;

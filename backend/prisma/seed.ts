@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import filesSeed from "../data/filesSeed";
+import postsFilesSeed from "../data/postsFilesSeed";
 import postsSeed from "../data/postsSeed";
 import usersSeed from "../data/usersSeed";
 
@@ -16,6 +17,10 @@ const main = async () => {
 
     await prisma.file.createMany({
         data: await filesSeed()
+    });
+
+    await prisma.postFile.createMany({
+        data: await postsFilesSeed()
     });
 };
 

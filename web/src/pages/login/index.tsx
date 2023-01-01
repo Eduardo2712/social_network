@@ -29,12 +29,12 @@ const Login: NextPage = () => {
 
             const response = await auth(values);
 
-            if (response.data.user && response.data.token) {
+            if (response.data.user && response.data.access_token) {
                 localStorage.setItem(
                     "user",
                     JSON.stringify({
                         ...response.data.user,
-                        token: response.data.token
+                        token: response.data.access_token
                     })
                 );
 
@@ -95,7 +95,7 @@ const Login: NextPage = () => {
                                         name="password"
                                         type="password"
                                         onChange={handleChange}
-                                        onKeyUp={(e: any) =>
+                                        onKeyUp={(e: { key: string }) =>
                                             e.key === "Enter" && handleSubmit
                                         }
                                     ></Field>
@@ -108,7 +108,7 @@ const Login: NextPage = () => {
                                 <div className="text_register">
                                     <Link href={"/register"}>
                                         {
-                                            "Don't have an account? Sign up is free"
+                                            "Do not have an account? Sign up is free"
                                         }
                                     </Link>
                                 </div>

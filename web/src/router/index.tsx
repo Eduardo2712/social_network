@@ -8,7 +8,7 @@ export type Props = {
 
 const ProtectedRoute = (props: Props) => {
     const { auth } = useAuth();
-    const PUBLIC_ROUTES = ["/login"];
+    const PUBLIC_ROUTES = ["/login", "/register"];
 
     if (
         !auth &&
