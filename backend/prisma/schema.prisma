@@ -23,7 +23,7 @@ model User {
     use_delete       Boolean   @default(false)
     use_text_status  String?   @db.VarChar(500)
     posts            Post[]
-    photo            File      @relation(fields: [use_id_photo], references: [id])
+    photo            File?     @relation(fields: [use_id_photo], references: [id])
 
     @@index([use_id_photo])
     @@map("user")

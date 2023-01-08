@@ -9,17 +9,25 @@ export class UserService {
     constructor(private readonly prisma: PrismaService) {}
 
     async create(create_user_dto: CreateUserDto): Promise<User> {
-        const data = {
-            ...create_user_dto,
-            use_id_type_user: 1,
-            use_delete: false,
-            password: bcrypt.hashSync(create_user_dto.password, 10)
-        };
-
-        const createdUser = await this.prisma.user.create({ data });
+        const user = await this.prisma.user.create({
+            data: {
+                use_id_type_user: 1,
+                use_delete: false,
+                password: bcrypt.hashSync(create_user_dto.password, 10),
+                email: create_user_dto.email,
+                use_birth_data: create_user_dto.use_birth_data,
+                use_name: create_user_dto.use_name,
+                use_phone: create_user_dto.use_phone,
+                photo: {
+                    create: {
+                        ...create_user_dto.photo
+                    }
+                }
+            }
+        });
 
         return {
-            ...createdUser,
+            ...user,
             password: undefined
         };
     }
