@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import Container from "./styles";
 import * as Yup from "yup";
+import FormInput from "../../components/form-input";
 
 const Register = () => {
     type Form = {
@@ -39,29 +40,33 @@ const Register = () => {
                 {({
                     values,
                     errors,
-                    touched,
                     handleChange,
                     handleBlur,
                     handleSubmit,
                     isSubmitting
                 }) => (
                     <form onSubmit={handleSubmit}>
-                        <input
-                            type="email"
-                            name="email"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
-                        />
-                        {errors.email && touched.email && errors.email}
-                        <input
-                            type="password"
-                            name="password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.password}
-                        />
-                        {errors.password && touched.password && errors.password}
+                        <div className="block_form">
+                            <FormInput
+                                label="E-mail *"
+                                name="email"
+                                value={values.email}
+                                type={"text"}
+                                on_change={handleChange}
+                                on_blur={handleBlur}
+                                errors={errors.email}
+                            />
+
+                            <FormInput
+                                label="Password *"
+                                name="password"
+                                value={values.password}
+                                type={"password"}
+                                on_change={handleChange}
+                                on_blur={handleBlur}
+                                errors={errors.password}
+                            />
+                        </div>
                         <button type="submit" disabled={isSubmitting}>
                             Submit
                         </button>
