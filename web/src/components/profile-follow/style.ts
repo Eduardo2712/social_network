@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 const Container = styled.div`
     .block_image_user {
-        height: 22rem;
-        width: 16rem;
+        height: 23rem;
+        width: 17rem;
         background-image: linear-gradient(
             to top,
             var(--color-container) 0,
@@ -44,6 +44,13 @@ const Container = styled.div`
         color: var(--color-text-black);
         font-size: 1.1rem;
         font-weight: 600;
+    }
+
+    .block_follow > a {
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--color-primary);
     }
 `;
 

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useAuth } from "../../context/auth";
 import Container from "./style";
 
@@ -28,6 +29,10 @@ const ProfileFollow = () => {
                     <p className="text_follow">Following</p>
 
                     <p className="text_follow">{0}</p>
+                </div>
+
+                <div className="block_follow">
+                    <Link href={"/profile"}>My profile</Link>
                 </div>
             </div>
         </Container>

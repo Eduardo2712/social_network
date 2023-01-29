@@ -2,6 +2,7 @@ import { useAuth } from "../../context/auth";
 import Container from "./style";
 import { useState, useEffect } from "react";
 import ProfileFollow from "../../components/profile-follow";
+import { updateStatus } from "../../requests/user.request";
 
 const Feed = () => {
     const { user } = useAuth();
@@ -30,7 +31,11 @@ const Feed = () => {
                         ></textarea>
 
                         <div className="block_button">
-                            <button type="button" className="button_status">
+                            <button
+                                type="button"
+                                className="button_status"
+                                onClick={() => updateStatus({ status })}
+                            >
                                 Submit
                             </button>
                         </div>

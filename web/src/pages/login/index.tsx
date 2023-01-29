@@ -1,10 +1,9 @@
-import { Formik } from "formik";
-import { ErrorMessage, Field, Form } from "formik";
+import { Formik, ErrorMessage, Field, Form } from "formik";
 import { NextPage } from "next";
 import Container from "./style";
 import * as Yup from "yup";
 import Link from "next/link";
-import { auth } from "../../requests/userRequest";
+import { auth } from "../../requests/auth.request";
 import { User } from "../../types";
 import { useRouter } from "next/router";
 import { useState } from "react";

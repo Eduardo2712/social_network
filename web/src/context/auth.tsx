@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { ContextLogin, User } from "../types";
 import { RoutesProps } from "react-router";
-import { auth } from "../requests/userRequest";
+import { auth } from "../requests/user.request";
 
 const AuthContext = createContext<ContextLogin>({} as ContextLogin);
 

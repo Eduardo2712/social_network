@@ -2,14 +2,21 @@ import styled from "styled-components";
 
 const Container = styled.div`
     .header {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
         height: 2.5rem;
         background-color: var(--color-primary);
-        gap: 1rem;
         padding: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header_options {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
     }
 
     .icon_header {
