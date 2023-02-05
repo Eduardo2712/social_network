@@ -5,6 +5,7 @@ import FormInput from "../../components/form-input";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftLong, faRightLong } from "@fortawesome/free-solid-svg-icons";
+import { maskPhone } from "../../utils/utils";
 
 const Register = () => {
     type Form = {
@@ -60,6 +61,28 @@ const Register = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="block_form">
                             <FormInput
+                                label="Name *"
+                                name="use_name"
+                                value={values.use_name}
+                                type={"text"}
+                                on_change={handleChange}
+                                on_blur={handleBlur}
+                                errors={errors.use_name}
+                            />
+
+                            <FormInput
+                                label="Phone number *"
+                                name="use_phone"
+                                value={values.use_phone}
+                                type={"text"}
+                                on_change={(e) => handleChange(maskPhone(e))}
+                                on_blur={(e) => handleBlur(maskPhone(e))}
+                                errors={errors.use_phone}
+                            />
+                        </div>
+
+                        <div className="block_form">
+                            <FormInput
                                 label="E-mail *"
                                 name="email"
                                 value={values.email}
@@ -77,18 +100,6 @@ const Register = () => {
                                 on_change={handleChange}
                                 on_blur={handleBlur}
                                 errors={errors.password}
-                            />
-                        </div>
-
-                        <div className="block_form">
-                            <FormInput
-                                label="E-mail *"
-                                name="email"
-                                value={values.email}
-                                type={"text"}
-                                on_change={handleChange}
-                                on_blur={handleBlur}
-                                errors={errors.email}
                             />
                         </div>
 

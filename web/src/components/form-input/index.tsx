@@ -4,8 +4,8 @@ type Props = {
     label: string;
     name: string;
     value: string;
-    on_change: (e: unknown) => void;
-    on_blur?: (e: unknown) => void;
+    on_change: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    on_blur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     type?: string;
     errors: string | undefined;
 };
@@ -13,19 +13,17 @@ type Props = {
 const FormInput = (props: Props) => {
     return (
         <Container>
-            <div className="block_input">
-                <label className="label_input">{props.label}</label>
+            <label className="label_input">{props.label}</label>
 
-                <input
-                    className="input"
-                    type={props.type}
-                    name={props.name}
-                    value={props.value}
-                    onChange={props.on_change}
-                ></input>
+            <input
+                className="input"
+                type={props.type}
+                name={props.name}
+                value={props.value}
+                onChange={props.on_change}
+            ></input>
 
-                {props.errors && <p className="text_error">{props.errors}</p>}
-            </div>
+            {props.errors && <p className="text_error">{props.errors}</p>}
         </Container>
     );
 };

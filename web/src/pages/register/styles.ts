@@ -7,8 +7,8 @@ const Container = styled.div`
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 1rem 5rem;
-        padding: 2rem;
+        gap: 1rem 2rem;
+        padding: 1rem 2rem;
     }
 
     .block_buttons {
@@ -18,6 +18,12 @@ const Container = styled.div`
         align-items: center;
         padding: 2rem;
         gap: 1rem 2rem;
+    }
+
+    @media only screen and (max-width: 1055px) {
+        .block_form {
+            justify-content: center;
+        }
     }
 
     @media only screen and (max-width: 400px) {

@@ -1,21 +1,20 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-    flex: 1;
-
-    .block_input {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.4rem;
-        height: 5rem;
-        min-width: 17rem;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    height: 5rem;
+    width: 100%;
+    max-width: 30rem;
 
     .label_input {
         font-size: 1.1rem;
         font-weight: 700;
         color: var(--color-primary);
+        width: 100%;
+        max-width: 30rem;
     }
 
     .input {
@@ -24,6 +23,7 @@ const Container = styled.div`
         border: 0;
         font-size: 1.2rem;
         width: 100%;
+        max-width: 30rem;
     }
 
     .text_error {
@@ -31,6 +31,8 @@ const Container = styled.div`
         font-weight: 700;
         color: var(--color-error);
         text-align: center;
+        width: 100%;
+        max-width: 30rem;
     }
 `;
 
