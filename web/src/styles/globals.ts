@@ -184,4 +184,52 @@ table {
     background-color: var(--color-background);
     min-height: 100vh;
 }
+
+.button_submit {
+    border: 0;
+    width: 10rem;
+    background-color: var(--color-primary);
+    color: var(--color-text-clear);
+    border-radius: 0.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    height: 2rem;
+}
+
+.button_submit > a {
+    text-decoration: none;
+    color: var(--color-text-clear);
+}
+
+.button_submit > svg {
+    font-size: 1.3rem;
+}
+
+.button_return {
+    border: 0;
+    width: 10rem;
+    background-color: var(--color-secondary);
+    color: var(--color-text-clear);
+    border-radius: 0.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    height: 2rem;
+}
+
+.button_return > a {
+    text-decoration: none;
+    color: var(--color-text-clear);
+}
+
+.button_return > svg {
+    font-size: 1.3rem;
+}
 `;

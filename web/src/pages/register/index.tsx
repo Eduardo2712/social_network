@@ -2,30 +2,42 @@ import { Formik } from "formik";
 import Container from "./styles";
 import * as Yup from "yup";
 import FormInput from "../../components/form-input";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLeftLong, faRightLong } from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => {
     type Form = {
         email: string;
         password: string;
         password_confirmation: string;
+        use_name: string;
+        use_phone: string;
+        use_birth_data: string;
     };
 
     const initialValues = {
         email: "",
         password: "",
-        password_confirmation: ""
+        password_confirmation: "",
+        use_name: "",
+        use_phone: "",
+        use_birth_data: ""
     };
 
     const schema = Yup.object().shape({
         email: Yup.string()
-            .email("Preencha com um e-mail válido")
-            .required("Preencha esse campo!"),
+            .email("Fill in with a valid e-mail!")
+            .required("Fill in this field!"),
         password: Yup.string()
-            .min(8, "Senha deve conter no mínimo 8 caracteres")
-            .required("Preencha esse campo!"),
+            .min(8, "Password must be at least 8 characters long!")
+            .required("Fill in this field!"),
         password_confirmation: Yup.string()
-            .min(8, "Senha deve conter no mínimo 8 caracteres")
-            .oneOf([Yup.ref("password"), null], "As senhas devem ser iguais")
+            .min(8, "Password must be at least 8 characters long!")
+            .oneOf([Yup.ref("password"), null], "Passwords must be the same!"),
+        use_name: Yup.string().required("Fill in this field!"),
+        use_phone: Yup.string().required("Fill in this field!"),
+        use_birth_data: Yup.date().required("Fill in this field!")
     });
 
     const onSubmit = async (values: Form) => {};
@@ -67,9 +79,40 @@ const Register = () => {
                                 errors={errors.password}
                             />
                         </div>
-                        <button type="submit" disabled={isSubmitting}>
-                            Submit
-                        </button>
+
+                        <div className="block_form">
+                            <FormInput
+                                label="E-mail *"
+                                name="email"
+                                value={values.email}
+                                type={"text"}
+                                on_change={handleChange}
+                                on_blur={handleBlur}
+                                errors={errors.email}
+                            />
+                        </div>
+
+                        <div className="block_buttons">
+                            <div className="button_return">
+                                <FontAwesomeIcon
+                                    title="Return"
+                                    icon={faLeftLong}
+                                />
+                                <Link href={"/login"}>Return</Link>
+                            </div>
+
+                            <button
+                                className="button_submit"
+                                type="submit"
+                                disabled={isSubmitting}
+                            >
+                                Submit
+                                <FontAwesomeIcon
+                                    title="Submit"
+                                    icon={faRightLong}
+                                />
+                            </button>
+                        </div>
                     </form>
                 )}
             </Formik>

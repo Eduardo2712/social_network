@@ -6,7 +6,24 @@ const Container = styled.div`
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
+        flex-wrap: wrap;
+        gap: 1rem 5rem;
+        padding: 2rem;
+    }
+
+    .block_buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem;
+        gap: 1rem 2rem;
+    }
+
+    @media only screen and (max-width: 400px) {
+        .block_buttons {
+            flex-direction: column;
+        }
     }
 `;
 
