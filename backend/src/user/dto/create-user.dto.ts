@@ -29,5 +29,5 @@ export class CreateUserDto extends User {
     use_phone: string;
 
     @IsDate()
-    use_birth_data: Date;
+    use_date_birth: Date;
 }

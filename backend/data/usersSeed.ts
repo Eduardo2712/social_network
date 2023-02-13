@@ -18,7 +18,7 @@ const usersSeed = async () => {
             use_text_status: faker.lorem.paragraph(1),
             use_id_photo: Math.floor(Math.random() * 300) + 1,
             use_date_status: faker.date.recent(),
-            use_birth_data: faker.date.birthdate(),
+            use_date_birth: faker.date.birthdate(),
             password: hash,
             use_delete: false
         };

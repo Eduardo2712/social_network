@@ -17,7 +17,7 @@ model User {
     use_name         String    @db.VarChar(255)
     email            String    @db.VarChar(255)
     use_phone        String    @db.VarChar(255)
-    use_birth_data   DateTime
+    use_date_birth   DateTime
     password         String    @db.VarChar(255)
     use_date_status  DateTime?
     use_delete       Boolean   @default(false)

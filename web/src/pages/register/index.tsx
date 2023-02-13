@@ -14,7 +14,7 @@ const Register = () => {
         password_confirmation: string;
         use_name: string;
         use_phone: string;
-        use_birth_data: string;
+        use_date_birth: string;
     };
 
     const initialValues = {
@@ -23,7 +23,7 @@ const Register = () => {
         password_confirmation: "",
         use_name: "",
         use_phone: "",
-        use_birth_data: ""
+        use_date_birth: ""
     };
 
     const schema = Yup.object().shape({
@@ -38,7 +38,7 @@ const Register = () => {
             .oneOf([Yup.ref("password"), null], "Passwords must be the same!"),
         use_name: Yup.string().required("Fill in this field!"),
         use_phone: Yup.string().required("Fill in this field!"),
-        use_birth_data: Yup.date().required("Fill in this field!")
+        use_date_birth: Yup.date().required("Fill in this field!")
     });
 
     const onSubmit = async (values: Form) => {};
@@ -100,6 +100,18 @@ const Register = () => {
                                 on_change={handleChange}
                                 on_blur={handleBlur}
                                 errors={errors.password}
+                            />
+                        </div>
+
+                        <div className="block_form">
+                            <FormInput
+                                label="Date of birth *"
+                                name="use_date_birth"
+                                value={values.use_date_birth}
+                                type={"date"}
+                                on_change={handleChange}
+                                on_blur={handleBlur}
+                                errors={errors.use_date_birth}
                             />
                         </div>
 

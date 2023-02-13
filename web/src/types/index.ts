@@ -12,7 +12,7 @@ export type User = {
     use_name: string;
     email: string;
     use_phone: string;
-    use_birth_data: Date;
+    use_date_birth: Date;
     password: string;
     use_date_status: Date | null;
     use_delete: boolean;

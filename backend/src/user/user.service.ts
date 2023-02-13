@@ -15,7 +15,7 @@ export class UserService {
                 use_delete: false,
                 password: bcrypt.hashSync(create_user_dto.password, 10),
                 email: create_user_dto.email,
-                use_birth_data: create_user_dto.use_birth_data,
+                use_date_birth: create_user_dto.use_date_birth,
                 use_name: create_user_dto.use_name,
                 use_phone: create_user_dto.use_phone,
                 photo: {
