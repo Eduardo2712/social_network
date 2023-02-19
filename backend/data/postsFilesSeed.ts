@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker/locale/pt_BR";
 import { PostFile } from "@prisma/client";
 
 const postsFilesSeed = async () => {

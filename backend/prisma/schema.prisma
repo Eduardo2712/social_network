@@ -8,12 +8,29 @@ datasource db {
     relationMode = "prisma"
 }
 
+model Address {
+    id             Int      @id @default(autoincrement())
+    add_cep        String   @db.VarChar(255)
+    add_street     String   @db.VarChar(255)
+    add_number     String   @db.VarChar(255)
+    add_district   String   @db.VarChar(255)
+    add_complement String?  @db.VarChar(255)
+    add_city       String   @db.VarChar(255)
+    add_state      String   @db.VarChar(255)
+    created_at     DateTime @default(now())
+    updated_at     DateTime @default(now())
+    User           User[]
+
+    @@map("address")
+}
+
 model User {
     id               Int       @id @default(autoincrement())
     created_at       DateTime  @default(now())
     updated_at       DateTime  @default(now())
     use_id_type_user Int
-    use_id_photo     Int
+    use_id_photo     Int?
+    use_id_address   Int
     use_name         String    @db.VarChar(255)
     email            String    @db.VarChar(255)
     use_phone        String    @db.VarChar(255)
@@ -23,8 +40,12 @@ model User {
     use_delete       Boolean   @default(false)
     use_text_status  String?   @db.VarChar(500)
     posts            Post[]
-    photo            File?     @relation(fields: [use_id_photo], references: [id])
+    photo            File?     @relation(fields: [use_id_photo], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    address          Address   @relation(fields: [use_id_address], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    Comment          Comment[]
 
+    @@index([use_id_type_user])
+    @@index([use_id_address])
     @@index([use_id_photo])
     @@map("user")
 }
@@ -36,8 +57,9 @@ model Post {
     pos_delete  Boolean    @default(false)
     created_at  DateTime   @default(now())
     updated_at  DateTime   @default(now())
-    user        User       @relation(fields: [pos_id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    user        User       @relation(fields: [pos_id_user], references: [id], onDelete: Cascade, onUpdate: NoAction)
     files       PostFile[]
+    comments    Comment[]
 
     @@index([pos_id_user])
     @@map("post")
@@ -49,24 +71,56 @@ model PostFile {
     pfi_id_file Int
     created_at  DateTime @default(now())
     updated_at  DateTime @default(now())
-    post        Post     @relation(fields: [pfi_id_post], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    file        File     @relation(fields: [pfi_id_file], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    post        Post     @relation(fields: [pfi_id_post], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    file        File     @relation(fields: [pfi_id_file], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
     @@index([pfi_id_post])
     @@index([pfi_id_file])
     @@map("post_file")
 }
 
+model Comment {
+    id          Int           @id @default(autoincrement())
+    com_id_user Int
+    com_id_post Int
+    com_text    String        @db.VarChar(500)
+    com_delete  Boolean       @default(false)
+    created_at  DateTime      @default(now())
+    updated_at  DateTime      @default(now())
+    user        User          @relation(fields: [com_id_user], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    files       CommentFile[]
+    Post        Post?         @relation(fields: [com_id_post], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@index([com_id_post])
+    @@index([com_id_user])
+    @@map("comment")
+}
+
+model CommentFile {
+    id          Int      @id @default(autoincrement())
+    cfi_id_post Int
+    cfi_id_file Int
+    created_at  DateTime @default(now())
+    updated_at  DateTime @default(now())
+    comment     Comment  @relation(fields: [cfi_id_post], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    file        File     @relation(fields: [cfi_id_file], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@index([cfi_id_post])
+    @@index([cfi_id_file])
+    @@map("comment_file")
+}
+
 model File {
-    id          Int        @id @default(autoincrement())
+    id          Int           @id @default(autoincrement())
     fil_size    Int
-    fil_name    String     @db.VarChar(255)
-    fil_delete  Boolean    @default(false)
-    created_at  DateTime   @default(now())
-    updated_at  DateTime   @default(now())
-    fil_path    String     @db.VarChar(255)
+    fil_name    String        @db.VarChar(255)
+    fil_delete  Boolean       @default(false)
+    created_at  DateTime      @default(now())
+    updated_at  DateTime      @default(now())
+    fil_path    String        @db.VarChar(255)
     posts_files PostFile[]
     users       User[]
+    CommentFile CommentFile[]
 
     @@map("file")
 }

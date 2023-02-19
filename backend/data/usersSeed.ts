@@ -12,11 +12,12 @@ const usersSeed = async () => {
 
         const user: Omit<User, "created_at" | "updated_at" | "id"> = {
             use_id_type_user: 1,
+            use_id_photo: Math.floor(Math.random() * 300) + 1,
+            use_id_address: Math.floor(Math.random() * 300) + 1,
             use_name: faker.name.fullName(),
             email: faker.internet.email(),
             use_phone: faker.phone.number(),
             use_text_status: faker.lorem.paragraph(1),
-            use_id_photo: Math.floor(Math.random() * 300) + 1,
             use_date_status: faker.date.recent(),
             use_date_birth: faker.date.birthdate(),
             password: hash,

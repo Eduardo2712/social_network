@@ -4,8 +4,8 @@ const Container = styled.div`
     .block_form {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
         flex-wrap: wrap;
         gap: 1rem 2rem;
         padding: 1rem 2rem;
