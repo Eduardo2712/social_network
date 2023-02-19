@@ -11,7 +11,7 @@ const addressesSeed = async () => {
             add_complement: faker.address.streetAddress(),
             add_street: faker.address.street(),
             add_district: faker.address.secondaryAddress(),
-            add_number: faker.random.numeric(),
+            add_number: faker.random.numeric().toString(),
             add_state: faker.address.state()
         };
 

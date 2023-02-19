@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import addressesSeed from "data/addressesSeed";
-import commentsFilesSeed from "data/commentsFilesSeed";
-import commentsSeed from "data/commentsSeed";
+import addressesSeed from "../data/addressesSeed";
+import commentsFilesSeed from "../data/commentsFilesSeed";
+import commentsSeed from "../data/commentsSeed";
 import filesSeed from "../data/filesSeed";
 import postsFilesSeed from "../data/postsFilesSeed";
 import postsSeed from "../data/postsSeed";

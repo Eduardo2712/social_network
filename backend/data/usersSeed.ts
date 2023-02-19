@@ -15,6 +15,7 @@ const usersSeed = async () => {
             use_id_photo: Math.floor(Math.random() * 300) + 1,
             use_id_address: Math.floor(Math.random() * 300) + 1,
             use_name: faker.name.fullName(),
+            use_username: faker.internet.userName(),
             email: faker.internet.email(),
             use_phone: faker.phone.number(),
             use_text_status: faker.lorem.paragraph(1),

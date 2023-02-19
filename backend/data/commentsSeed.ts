@@ -8,7 +8,7 @@ const commentsSeed = async () => {
         const comment: Omit<Comment, "created_at" | "updated_at" | "id"> = {
             com_delete: false,
             com_id_user: Math.floor(Math.random() * 100) + 1,
-            com_text: faker.lorem.text(),
+            com_text: faker.lorem.words(10),
             com_id_post: Math.floor(Math.random() * 300) + 1
         };
 

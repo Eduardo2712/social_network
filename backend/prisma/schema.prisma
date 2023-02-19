@@ -34,6 +34,7 @@ model User {
     use_name         String    @db.VarChar(255)
     email            String    @db.VarChar(255)
     use_phone        String    @db.VarChar(255)
+    use_username     String    @db.VarChar(255)
     use_date_birth   DateTime
     password         String    @db.VarChar(255)
     use_date_status  DateTime?
@@ -97,15 +98,15 @@ model Comment {
 }
 
 model CommentFile {
-    id          Int      @id @default(autoincrement())
-    cfi_id_post Int
-    cfi_id_file Int
-    created_at  DateTime @default(now())
-    updated_at  DateTime @default(now())
-    comment     Comment  @relation(fields: [cfi_id_post], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    file        File     @relation(fields: [cfi_id_file], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    id             Int      @id @default(autoincrement())
+    cfi_id_comment Int
+    cfi_id_file    Int
+    created_at     DateTime @default(now())
+    updated_at     DateTime @default(now())
+    comment        Comment  @relation(fields: [cfi_id_comment], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    file           File     @relation(fields: [cfi_id_file], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@index([cfi_id_post])
+    @@index([cfi_id_comment])
     @@index([cfi_id_file])
     @@map("comment_file")
 }
