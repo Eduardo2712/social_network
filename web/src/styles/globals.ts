@@ -3,9 +3,9 @@ import { createGlobalStyle } from "styled-components";
 export const Globals = createGlobalStyle`
 
 :root {
-    --color-background: #f4f4f4;
+    --color-background: #fbfbfb;
     --color-background-image: #f9f9f9;
-    --color-border: #f4f4f4;
+    --color-border: #fbfbfb;
     --color-container: #ffffff;
     --color-text-clear: #ffffff;
     --color-text-black: #2a2a2a;
@@ -24,7 +24,7 @@ export const Globals = createGlobalStyle`
 }
 
 body {
-    background-color: var(--color-background);
+    background-color: var(--color-container);
     -webkit-font-smoothing: antialiased;
 }
 
@@ -197,7 +197,7 @@ table {
     gap: 0.7rem;
     font-size: 1.1rem;
     font-weight: 700;
-    height: 2rem;
+    height: 2.3rem;
 }
 
 .button_submit > a {
@@ -221,7 +221,7 @@ table {
     gap: 0.7rem;
     font-size: 1.1rem;
     font-weight: 700;
-    height: 2rem;
+    height: 2.3rem;
 }
 
 .button_return > a {

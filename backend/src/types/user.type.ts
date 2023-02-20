@@ -5,6 +5,7 @@ export class User {
     use_id_type_user: number;
     use_id_photo?: number;
     use_name: string;
+    use_username: string;
     email: string;
     use_phone: string;
     use_date_birth: string | Date;
