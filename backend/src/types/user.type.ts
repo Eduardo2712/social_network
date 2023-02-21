@@ -1,3 +1,4 @@
+import { Address } from "./address.type";
 import { File } from "./file.type";
 
 export class User {
@@ -16,4 +17,5 @@ export class User {
     created_at?: Date;
     updated_at?: Date;
     photo?: File;
+    address: Address;
 }

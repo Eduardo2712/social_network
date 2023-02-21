@@ -18,9 +18,15 @@ export class UserService {
                 use_date_birth: create_user_dto.use_date_birth,
                 use_name: create_user_dto.use_name,
                 use_phone: create_user_dto.use_phone,
+                use_username: create_user_dto.use_username,
                 photo: {
                     create: {
                         ...create_user_dto.photo
+                    }
+                },
+                address: {
+                    create: {
+                        ...create_user_dto.address
                     }
                 }
             }
@@ -28,6 +34,8 @@ export class UserService {
 
         return {
             ...user,
+            address: create_user_dto.address,
+            photo: create_user_dto.photo,
             password: undefined
         };
     }

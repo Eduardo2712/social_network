@@ -29,7 +29,10 @@ export class AuthService {
         };
     }
 
-    async validateUser(email: string, password: string): Promise<User> {
+    async validateUser(
+        email: string,
+        password: string
+    ): Promise<Omit<User, "address">> {
         const user = await this.userService.findByEmail(email);
 
         if (user) {
