@@ -1,24 +1,39 @@
-import { Formik, ErrorMessage, Field, Form } from "formik";
+import { Formik, Form } from "formik";
 import { NextPage } from "next";
-import Container from "./style";
 import * as Yup from "yup";
-import Link from "next/link";
 import { auth } from "../../requests/auth.request";
 import { User } from "../../types";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Link from "next/link";
+import {
+    Flex,
+    Box,
+    FormControl,
+    FormLabel,
+    Input,
+    Stack,
+    Link as LinkChakra,
+    Button,
+    Heading,
+    Text,
+    Spinner,
+    useToast
+} from "@chakra-ui/react";
 
 const Login: NextPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const router = useRouter();
 
+    const toast = useToast();
+
     const schema = Yup.object().shape({
         email: Yup.string()
             .email("Fill in a valid e-mail!")
             .required("Fill in this field!"),
         password: Yup.string()
-            .min(6, "Password must be at least 6 characters long!")
+            .min(6, "Must contain at least 6 characters!")
             .required("Fill in this field!")
     });
 
@@ -39,11 +54,25 @@ const Login: NextPage = () => {
 
                 router.push("/feed");
             }
-        } catch (error) {
+        } catch (error: any) {
             if (typeof error === "string") {
-                console.error(error);
-            } else if (error instanceof Error) {
-                console.error(error.message);
+                toast({
+                    title: "Error.",
+                    description: error ?? "An error has occurred",
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true
+                });
+            } else {
+                toast({
+                    title: "Error.",
+                    description:
+                        error?.response?.data?.message[0] ??
+                        "An error has occurred",
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true
+                });
             }
         } finally {
             setLoading(false);
@@ -51,82 +80,102 @@ const Login: NextPage = () => {
     };
 
     return (
-        <Container>
-            <div className="container_login">
-                <p className="text_login">Login</p>
+        <Formik
+            onSubmit={onSubmit}
+            validateOnMount
+            validationSchema={schema}
+            initialValues={{
+                email: "",
+                password: ""
+            }}
+        >
+            {({ handleChange, handleBlur, values, errors, touched }) => (
+                <Form method="post">
+                    <Flex minH={"100vh"} align={"center"} justify={"center"}>
+                        <Stack
+                            spacing={8}
+                            mx={"auto"}
+                            maxW={"lg"}
+                            py={12}
+                            px={6}
+                        >
+                            <Stack align={"center"}>
+                                <Heading fontSize={"4xl"}>Login</Heading>
+                            </Stack>
+                            <Box rounded={"lg"} boxShadow={"lg"} p={12}>
+                                <Stack spacing={4}>
+                                    <FormControl id="email">
+                                        <FormLabel>Email address</FormLabel>
+                                        <Input
+                                            name="email"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.email}
+                                        />
 
-                <Formik
-                    onSubmit={onSubmit}
-                    validateOnMount
-                    validationSchema={schema}
-                    initialValues={{
-                        email: "",
-                        password: ""
-                    }}
-                >
-                    {({ handleChange, handleSubmit }) => (
-                        <Form method="post">
-                            <div className="block_form">
-                                <div className="block_input_form">
-                                    <span className="text_form">E-mail</span>
+                                        <Text
+                                            fontSize="md"
+                                            color={"red.500"}
+                                            fontWeight={"semibold"}
+                                        >
+                                            {errors.email &&
+                                                touched.email &&
+                                                errors.email}
+                                        </Text>
+                                    </FormControl>
 
-                                    <Field
-                                        className="input_form"
-                                        id="email"
-                                        name="email"
-                                        onChange={handleChange}
-                                        onKeyUp={(e: any) =>
-                                            e.key === "Enter" && handleSubmit
-                                        }
-                                    ></Field>
+                                    <FormControl id="password">
+                                        <FormLabel>Password</FormLabel>
+                                        <Input
+                                            name="password"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.password}
+                                        />
 
-                                    <p className="text_error">
-                                        <ErrorMessage name="email" />
-                                    </p>
-                                </div>
-
-                                <div className="block_input_form">
-                                    <span className="text_form">Password</span>
-
-                                    <Field
-                                        className="input_form"
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        onChange={handleChange}
-                                        onKeyUp={(e: { key: string }) =>
-                                            e.key === "Enter" && handleSubmit
-                                        }
-                                    ></Field>
-
-                                    <p className="text_error">
-                                        <ErrorMessage name="password" />
-                                    </p>
-                                </div>
-
-                                <div className="text_register">
-                                    <Link href={"/register"}>
-                                        {
-                                            "Do not have an account? Sign up is free"
-                                        }
-                                    </Link>
-                                </div>
-                            </div>
-
-                            <div className="block_buttons">
-                                <button
-                                    className="button_enter"
-                                    type="submit"
-                                    disabled={loading}
-                                >
-                                    Enter
-                                </button>
-                            </div>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
-        </Container>
+                                        <Text
+                                            fontSize="md"
+                                            color={"red.500"}
+                                            fontWeight={"semibold"}
+                                        >
+                                            {errors.password &&
+                                                touched.password &&
+                                                errors.password}
+                                        </Text>
+                                    </FormControl>
+                                    <Stack spacing={6}>
+                                        <Stack
+                                            direction={{
+                                                base: "column",
+                                                sm: "row"
+                                            }}
+                                            align={"start"}
+                                            justify={"space-between"}
+                                        >
+                                            <Link href="/register">
+                                                <LinkChakra color={"blue.400"}>
+                                                    {"I don't have an account"}
+                                                </LinkChakra>
+                                            </Link>
+                                        </Stack>
+                                        <Button
+                                            type="submit"
+                                            bg={"blue.400"}
+                                            color={"white"}
+                                            _hover={{
+                                                bg: "blue.500"
+                                            }}
+                                        >
+                                            {!loading ? "Sign in" : <Spinner />}
+                                        </Button>
+                                    </Stack>
+                                </Stack>
+                            </Box>
+                        </Stack>
+                    </Flex>
+                </Form>
+            )}
+        </Formik>
     );
 };
 

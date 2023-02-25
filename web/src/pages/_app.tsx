@@ -3,12 +3,13 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { Globals } from "../styles/globals";
 import Head from "next/head";
 import Header from "../components/header";
 import { AuthProvider } from "../context/auth";
 import Loading from "../components/loading";
 import ProtectedRoute from "../router";
+import { ChakraProvider } from "@chakra-ui/react";
+import { themeDefault } from "../styles/theme";
 
 config.autoAddCss = false;
 
@@ -31,23 +32,24 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
                 />
                 <title>Social Network</title>
             </Head>
-            <Globals />
-            {!loading ? (
-                <ThemeProvider theme={{}}>
-                    <AuthProvider>
-                        <ProtectedRoute router={router}>
-                            <div className="body_container">
-                                {!["/login", "/register"].includes(
-                                    router.asPath
-                                ) && <Header />}
-                                <Component {...pageProps} />
-                            </div>
-                        </ProtectedRoute>
-                    </AuthProvider>
-                </ThemeProvider>
-            ) : (
-                <Loading />
-            )}
+            <ChakraProvider theme={themeDefault}>
+                {!loading ? (
+                    <ThemeProvider theme={{}}>
+                        <AuthProvider>
+                            <ProtectedRoute router={router}>
+                                <div className="body_container">
+                                    {!["/login", "/register"].includes(
+                                        router.asPath
+                                    ) && <Header />}
+                                    <Component {...pageProps} />
+                                </div>
+                            </ProtectedRoute>
+                        </AuthProvider>
+                    </ThemeProvider>
+                ) : (
+                    <Loading />
+                )}
+            </ChakraProvider>
         </>
     );
 };

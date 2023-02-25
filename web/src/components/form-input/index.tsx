@@ -8,6 +8,7 @@ type Props = {
     on_blur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     type?: string;
     errors: string | undefined;
+    touched: boolean | undefined;
 };
 
 const FormInput = (props: Props) => {
@@ -23,7 +24,9 @@ const FormInput = (props: Props) => {
                 onChange={props.on_change}
             ></input>
 
-            {props.errors && <p className="text_error">{props.errors}</p>}
+            {props.errors && props.touched && (
+                <p className="text_error">{props.errors}</p>
+            )}
         </Container>
     );
 };

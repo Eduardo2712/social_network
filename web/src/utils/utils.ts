@@ -44,6 +44,6 @@ export const maskPhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     return e;
 };
 
-export const searchCEP = async (cep: string) => {
+export const getCEP = async (cep: string) => {
     return await axios.get(`https://viacep.com.br/ws/${cep}/json`);
 };

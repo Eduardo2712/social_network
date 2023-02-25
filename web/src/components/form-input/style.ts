@@ -11,8 +11,8 @@ const Container = styled.div`
 
     .label_input {
         font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--color-primary);
+        font-weight: 600;
+        color: var(--color-text-black);
         width: 100%;
         max-width: 30rem;
     }
@@ -24,13 +24,18 @@ const Container = styled.div`
         font-size: 1.2rem;
         width: 100%;
         max-width: 30rem;
+        background-color: var(--color-background);
+        color: var(--color-text-black);
+    }
+
+    .input:focus {
+        outline: var(--color-primary) solid 0.15rem;
     }
 
     .text_error {
         font-size: 1rem;
-        font-weight: 700;
+        font-weight: 600;
         color: var(--color-error);
-        text-align: center;
         width: 100%;
         max-width: 30rem;
     }
