@@ -25,7 +25,6 @@ const Login: NextPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const router = useRouter();
-
     const toast = useToast();
 
     const schema = Yup.object().shape({
@@ -60,7 +59,7 @@ const Login: NextPage = () => {
                     title: "Error.",
                     description: error ?? "An error has occurred",
                     status: "error",
-                    duration: 9000,
+                    duration: 5000,
                     isClosable: true
                 });
             } else {
@@ -70,7 +69,7 @@ const Login: NextPage = () => {
                         error?.response?.data?.message[0] ??
                         "An error has occurred",
                     status: "error",
-                    duration: 9000,
+                    duration: 5000,
                     isClosable: true
                 });
             }
@@ -106,6 +105,7 @@ const Login: NextPage = () => {
                                 <Stack spacing={4}>
                                     <FormControl id="email">
                                         <FormLabel>Email address</FormLabel>
+
                                         <Input
                                             name="email"
                                             onChange={handleChange}
@@ -117,6 +117,7 @@ const Login: NextPage = () => {
                                             fontSize="md"
                                             color={"red.500"}
                                             fontWeight={"semibold"}
+                                            mt={2}
                                         >
                                             {errors.email &&
                                                 touched.email &&
@@ -126,6 +127,7 @@ const Login: NextPage = () => {
 
                                     <FormControl id="password">
                                         <FormLabel>Password</FormLabel>
+
                                         <Input
                                             name="password"
                                             onChange={handleChange}
@@ -137,12 +139,14 @@ const Login: NextPage = () => {
                                             fontSize="md"
                                             color={"red.500"}
                                             fontWeight={"semibold"}
+                                            mt={2}
                                         >
                                             {errors.password &&
                                                 touched.password &&
                                                 errors.password}
                                         </Text>
                                     </FormControl>
+
                                     <Stack spacing={6}>
                                         <Stack
                                             direction={{
@@ -158,6 +162,7 @@ const Login: NextPage = () => {
                                                 </LinkChakra>
                                             </Link>
                                         </Stack>
+
                                         <Button
                                             type="submit"
                                             bg={"blue.400"}
