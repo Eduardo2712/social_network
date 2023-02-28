@@ -21,6 +21,7 @@ import {
     useToast
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
+import { createUser } from "../../requests/user.request";
 
 const Register = () => {
     type Form = {
@@ -109,6 +110,8 @@ const Register = () => {
         }
 
         setLoading(true);
+
+        const response = await createUser(form_data);
     };
 
     const searchCEP = async (

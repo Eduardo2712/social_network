@@ -66,7 +66,7 @@ const Login: NextPage = () => {
                 toast({
                     title: "Error.",
                     description:
-                        error?.response?.data?.message[0] ??
+                        error?.response?.data?.message ??
                         "An error has occurred",
                     status: "error",
                     duration: 5000,
@@ -129,6 +129,7 @@ const Login: NextPage = () => {
                                         <FormLabel>Password</FormLabel>
 
                                         <Input
+                                            type={"password"}
                                             name="password"
                                             onChange={handleChange}
                                             onBlur={handleBlur}

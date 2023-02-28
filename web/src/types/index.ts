@@ -42,3 +42,16 @@ export type File = {
     created_at: Date;
     updated_at: Date;
 };
+
+export type Address = {
+    id: number;
+    add_cep: string;
+    add_street: string;
+    add_number: string;
+    add_district: string;
+    add_complement: string;
+    add_city: string;
+    add_state: string;
+    created_at: Date;
+    updated_at: Date;
+};
