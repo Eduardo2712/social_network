@@ -111,7 +111,31 @@ const Register = () => {
 
         setLoading(true);
 
-        const response = await createUser(form_data);
+        try {
+            const response = await createUser(form_data);
+        } catch (error: any) {
+            if (typeof error === "string") {
+                toast({
+                    title: "Error.",
+                    description: error ?? "An error has occurred",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true
+                });
+            } else {
+                toast({
+                    title: "Error.",
+                    description:
+                        error?.response?.data?.message ??
+                        "An error has occurred",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true
+                });
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
     const searchCEP = async (

@@ -6,7 +6,7 @@ import {
     MinLength,
     IsDate
 } from "class-validator";
-import { User } from "src/types/user.type";
+import { User } from "../entities/user.entity";
 
 export class CreateUserDto extends User {
     @IsEmail()
@@ -27,6 +27,7 @@ export class CreateUserDto extends User {
     use_name: string;
 
     use_phone: string;
+    use_username: string;
 
     @IsDate()
     use_date_birth: Date;

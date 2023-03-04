@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 import { UnauthorizedError } from "./errors/unauthorized.error";
-import { UserService } from "../user/user.service";
+import { UsersService } from "../users/users.service";
 import { UserPayload } from "./models/UserPayload";
 import { UserToken } from "./models/UserToken";
 import { User } from "src/types/user.type";
@@ -11,7 +11,7 @@ import { User } from "src/types/user.type";
 export class AuthService {
     constructor(
         private readonly jwtService: JwtService,
-        private readonly userService: UserService
+        private readonly usersService: UsersService
     ) {}
 
     async login(
@@ -33,7 +33,7 @@ export class AuthService {
         email: string,
         password: string
     ): Promise<Omit<User, "address">> {
-        const user = await this.userService.findByEmail(email);
+        const user = await this.usersService.findByEmail(email);
 
         if (user) {
             const is_password_valid = await bcrypt.compare(
