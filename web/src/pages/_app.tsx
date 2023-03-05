@@ -6,9 +6,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import Head from "next/head";
 import Header from "../components/header";
 import { AuthProvider } from "../context/auth";
-import Loading from "../components/loading";
 import ProtectedRoute from "../router";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Spinner } from "@chakra-ui/react";
 import { themeDefault } from "../styles/theme";
 
 config.autoAddCss = false;
@@ -47,7 +46,7 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
                         </AuthProvider>
                     </ThemeProvider>
                 ) : (
-                    <Loading />
+                    <Spinner />
                 )}
             </ChakraProvider>
         </>

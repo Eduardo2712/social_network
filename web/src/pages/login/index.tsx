@@ -171,8 +171,9 @@ const Login: NextPage = () => {
                                             _hover={{
                                                 bg: "blue.500"
                                             }}
+                                            isLoading={loading}
                                         >
-                                            {!loading ? "Sign in" : <Spinner />}
+                                            Sign in
                                         </Button>
                                     </Stack>
                                 </Stack>

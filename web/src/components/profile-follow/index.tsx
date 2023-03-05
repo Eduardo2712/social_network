@@ -1,41 +1,67 @@
+import { Flex, Text, Link as LinkChakra } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "../../context/auth";
-import Container from "./style";
 
 const ProfileFollow = () => {
     const { user } = useAuth();
 
     return (
-        <Container>
-            <div className="block_image_user">
-                <Image
-                    src={user?.photo?.fil_path ?? ""}
-                    className="user_image"
-                    width={120}
-                    height={120}
-                    alt="User photo"
-                />
+        <Flex
+            direction={"column"}
+            width={"12rem"}
+            backgroundColor={"gray.50"}
+            padding={"1rem"}
+            borderRadius={"0.2rem"}
+        >
+            <Image
+                src={user?.photo?.fil_path ?? ""}
+                width={120}
+                height={120}
+                alt="User photo"
+            />
 
-                <p className="text_name">{user?.use_name}</p>
+            <Text
+                fontSize="lg"
+                fontWeight={"bold"}
+                color={"gray.600"}
+                marginTop={"1rem"}
+                marginBottom={"0.5rem"}
+                textAlign={"center"}
+            >
+                {user?.use_name}
+            </Text>
 
-                <div className="block_follow">
-                    <p className="text_follow">Followers</p>
+            <Flex direction={"column"} alignItems={"center"}>
+                <Text fontSize="md" color={"gray.700"}>
+                    Followers
+                </Text>
 
-                    <p className="text_follow">{0}</p>
-                </div>
+                <Text fontSize="md" fontWeight={"bold"} color={"gray.700"}>
+                    {0}
+                </Text>
+            </Flex>
 
-                <div className="block_follow">
-                    <p className="text_follow">Following</p>
+            <Flex direction={"column"} alignItems={"center"}>
+                <Text fontSize="md" color={"gray.700"}>
+                    Following
+                </Text>
 
-                    <p className="text_follow">{0}</p>
-                </div>
+                <Text fontSize="md" fontWeight={"bold"} color={"gray.700"}>
+                    {0}
+                </Text>
+            </Flex>
 
-                <div className="block_follow">
-                    <Link href={"/profile"}>My profile</Link>
-                </div>
-            </div>
-        </Container>
+            <Link href={"/profile"}>
+                <LinkChakra
+                    marginTop={"1.5rem"}
+                    color={"blue.400"}
+                    textAlign={"center"}
+                >
+                    My profile
+                </LinkChakra>
+            </Link>
+        </Flex>
     );
 };
 

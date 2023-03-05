@@ -126,7 +126,7 @@ const Register = () => {
                 toast({
                     title: "Error.",
                     description:
-                        error?.response?.data?.message ??
+                        error?.response?.data?.message[0] ??
                         "An error has occurred",
                     status: "error",
                     duration: 5000,
@@ -734,17 +734,12 @@ const Register = () => {
                                     bg={"blue.400"}
                                     color={"white"}
                                     w="full"
+                                    isLoading={loading}
                                     _hover={{
                                         bg: "blue.500"
                                     }}
                                 >
-                                    {step === 0 ? (
-                                        "Next"
-                                    ) : !loading ? (
-                                        "Submit"
-                                    ) : (
-                                        <Spinner />
-                                    )}
+                                    {step === 0 ? "Next" : "Submit"}
                                 </Button>
                             </Stack>
                         </Stack>
