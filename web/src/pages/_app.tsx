@@ -46,7 +46,7 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
                         </AuthProvider>
                     </ThemeProvider>
                 ) : (
-                    <Spinner />
+                    <Spinner color="blue.400" />
                 )}
             </ChakraProvider>
         </>

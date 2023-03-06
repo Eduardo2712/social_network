@@ -17,7 +17,6 @@ import {
     Center,
     Text,
     Box,
-    Spinner,
     useToast
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
@@ -717,6 +716,7 @@ const Register = () => {
                                     bg={"red.400"}
                                     color={"white"}
                                     w="full"
+                                    isLoading={loading}
                                     _hover={{
                                         bg: "red.500"
                                     }}
